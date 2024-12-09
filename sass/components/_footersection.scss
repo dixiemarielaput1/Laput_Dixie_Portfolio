@@ -1,0 +1,53 @@
+    @use '../abstracts' as *;
+
+    footer {
+
+        .footer-copyright{
+            font-size: 20px !important;
+            text-align:center !important;
+            color: white !important;
+        }
+        .title-footer{
+         
+            font-weight: 600;
+        }
+
+        .title-footer{
+            color:white;
+            font-size: 2rem;
+        }
+
+        hr {
+        border-color: white; 
+        }
+    
+
+        p.footer-signature {
+        color: white; 
+        font-size: 0.875rem; 
+        text-align: center;
+        font-weight:600;
+        }
+        li{
+            font-size:1.1rem;
+            color: #00FFDC;
+            line-height:30px;
+        }
+
+        .footer-right-info{
+            color:white;
+            text-align: right;
+        }
+
+        #email-footer{
+            font-size: 18px;
+            color: #00FFDC;
+        }
+
+        .text-details{
+            font-size: 60px;
+            line-height: 1;
+        }
+
+    }
+

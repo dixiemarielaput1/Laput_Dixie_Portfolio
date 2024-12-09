@@ -1,0 +1,110 @@
+@use '../abstracts' as *;
+
+    .column-skills{
+      
+            border: 2px solid $primaryColor;
+            border-radius: 10px; 
+            padding: 10px 15px;
+            text-align: center;
+        
+        
+    }
+
+    #skills1{
+        gap: 20px;
+    }
+
+.column-1-container,
+.column-2-container,
+.column-3-container,
+.column-4-container { 
+    display: flex;
+    flex-direction: row; 
+    gap: 50px; 
+    margin: 5px 20px 0px 5px;
+}
+
+.skills{
+    font-size: 80px;
+    margin:0;
+    padding: 0;
+    color: $secondaryColor;
+}
+
+
+//galery
+.skills-selection {
+    position: relative; 
+    overflow: hidden;
+}
+
+.gallery-skills {
+    display: flex;
+    align-items: center;
+}
+
+.gallery {
+    display: flex;
+    transition: transform 0.5s ease; 
+}
+
+.gallery-item {
+    min-width: 100%;
+    box-sizing: border-box; 
+}
+
+.gallery-image {
+    width: 100%; 
+    height: auto;
+}
+
+.arrow {
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.gallery-skills:hover .arrow {
+    opacity: 1; 
+}
+
+
+.gallery-arrow-left, .gallery-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+  }
+  
+  .gallery-arrow-left {
+    left: 0;
+  }
+  
+  .gallery-arrow-right {
+    right: 0;
+  }
+  
+
+  .skills-selection:hover .gallery-arrow-left,
+  .skills-selection:hover .gallery-arrow-right {
+    opacity: 1;
+  }
+  
+ 
+  .gallery-arrow-left:hover, .gallery-arrow-right:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1); 
+  }

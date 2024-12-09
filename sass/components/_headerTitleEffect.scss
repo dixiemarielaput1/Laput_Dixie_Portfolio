@@ -1,0 +1,38 @@
+
+#demo-reel{
+   
+    height: 500vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#titleEffect1{
+  
+h1 {
+    opacity: 0;
+    display: flex;
+    margin-top: 100vh;
+    
+}
+
+p {
+    opacity: 0;
+    display: inline-block;
+    transform: translateY(-500px);
+    color: #5DFFE5;
+  
+    font-size: 200px;   
+}
+}
+
+
+#player-container{
+    background-color: #01FFB4;
+}
+
+.video-container{
+    border-radius: 10px;
+}

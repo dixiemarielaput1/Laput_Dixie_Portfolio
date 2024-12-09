@@ -1,0 +1,30 @@
+@use '../abstracts' as *;
+.welcome_part {
+  white-space: nowrap; 
+  animation: scroll 10s linear infinite; 
+}
+
+.text-center {
+  font-size: 100px;
+  span{
+    padding: 0px 120px;
+  }
+}
+.welcome_inner {
+  overflow: hidden; 
+  position: relative; 
+}
+
+#welcomeText {
+  display: flex; 
+  animation: scroll 10s linear infinite; 
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%); 
+  }
+}
