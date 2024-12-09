@@ -1,0 +1,48 @@
+.projects-main-info {
+  p {
+      color: white;
+  }
+}
+
+.box {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: black;
+  margin: 5px;
+  border-radius: 5px;
+  border: solid 3px #00FFDC;
+  transform: translateY(-100px);
+  font-size: 1.7rem;
+}
+
+.skills {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+
+.tools-border {
+  display: inline-block;
+  border: 0.5px solid #00FFDC;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: center;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+.galaxy-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.7;
+}

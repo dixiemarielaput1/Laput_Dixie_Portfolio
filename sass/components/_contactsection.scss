@@ -1,0 +1,43 @@
+@use '../abstracts' as *;
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%; 
+  padding: 20px; 
+  border-radius: 8px; 
+}
+
+.bg-contact-form {
+  background-color: #00FFDC; 
+}
+
+.form-input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; 
+}
+
+.submit-button {
+    
+    align-self: center;
+
+ 
+
+  margin-top: 10px;
+  width: 120px;
+  height: 50px;
+  padding: 3px 8px; 
+  font-size: 0.9rem; 
+  background-color: black; 
+  color: #00FFDC; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #333; 
+  }
+}
