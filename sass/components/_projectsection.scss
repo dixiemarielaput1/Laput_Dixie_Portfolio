@@ -1,0 +1,142 @@
+@use '../abstracts' as *;
+
+@media (min-width: 1024px) { 
+    .project-inside {
+        font-size: 3rem;
+    }
+
+    .bg-white {
+        padding: 0px 150px;
+    }
+
+    .text-inside {
+        position: absolute;
+    }
+
+    .date-inside {
+        margin: 110px 0px 0px 0px;
+    }
+
+    .project-inside {
+        padding: 20px 40px 10px 40px;
+    }
+
+    .arrowselect-inside {
+        padding: 70px 40px 10px 40px; 
+        gap: 20px;  
+    }
+
+    .project-img {}
+
+    .project-arrow-3 {
+        width: 40px;
+        height: 40px;
+        transform: rotate(90deg);
+    }
+
+    .date-published {
+        padding: 40px;
+        writing-mode: vertical-rl;
+    }
+
+    .project-arrow-1 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .project-arrow-2 {
+        width: 40px;
+        height: 40px;
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 412px) { 
+    .project-gallery-left {
+        width: 75%; 
+    }
+
+    .project-gallery-right {
+        width: 25%; 
+        margin-top: 0; 
+    }
+
+    .project-inside {
+        font-size: 1rem;
+    }
+
+    .bg-white {
+        padding: 0px 20px;
+    }
+
+    .text-inside {
+        position: absolute;
+    }
+
+    .date-inside {
+        padding: 10px 40px 10px 40px;
+    }
+
+    .project-inside {
+        padding: 20px 40px 10px 40px;
+    }
+
+    .arrowselect-inside {
+        padding: 70px 40px 10px 40px; 
+        gap: 20px;  
+    }
+
+
+
+    .project-arrow-3 {
+        width: 20px;
+        height: 20px;
+        transform: rotate(90deg);
+    }
+
+    .date-published {
+        padding: 40px;
+        writing-mode: vertical-rl;
+    }
+
+    .project-arrow-1 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .project-arrow-2 {
+        width: 40px;
+        height: 40px;
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 768px) { 
+ 
+}
+
+@media (min-width: 1024px) { 
+    .projects-main-info {
+        p {
+            color: black;
+            padding: 20px 0;
+            font-size: 1rem;
+            text-align: left;
+        }
+    }
+
+    .projects-main-title {
+        h1 {
+            color: $primaryColor; 
+            margin: 0 0 90px 0;
+            font-size: 5rem;
+        }
+    }
+
+    .viewproject img { 
+        transform: rotate(45deg);
+        width: 40px;
+        height: 40px;
+        transition: transform 0.3s;
+    }
+}

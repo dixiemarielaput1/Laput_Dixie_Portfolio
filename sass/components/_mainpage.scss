@@ -1,0 +1,61 @@
+.projects-main-info {
+  p {
+      color: white;
+  }
+}
+
+.box {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: black;
+  margin: 5px;
+  border-radius: 5px;
+  border: solid 3px #00FFDC;
+  transform: translateY(-100px);
+  font-size: 1.7rem;
+}
+
+.skills {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+
+.tools-border {
+  display: inline-block;
+  border: 0.5px solid #00FFDC;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: center;
+}
+
+
+
+.smallest {
+  display: none !important; /* Hide by default with !important */
+
+  @media (min-width: 768px) {
+    display: block !important; /* Show from tablet size (768px) and up with !important */
+ 
+  }
+}
+
+@media (min-width: 412px) {
+.set-tools-text{
+  font-size:2rem;
+}
+
+
+.service-text{
+  text-align: center;
+}
+
+.center-al{
+  text-align: center;
+}
+}
+
+input::placeholder, textarea::placeholder {
+  color: black;
+}
+

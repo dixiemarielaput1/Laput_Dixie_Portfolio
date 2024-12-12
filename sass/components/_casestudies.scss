@@ -1,0 +1,165 @@
+.casestudies-container {
+    padding: 16px;
+    line-height: 1.9;
+    margin: 0 auto;
+    max-width: 1200px; 
+
+    h1 {
+        font-weight: 400;
+        margin-bottom: 1px;
+        color: #01FFB4;
+        font-size: 3.3rem;
+        text-align: left;
+    }
+
+    .full-width-hr-main {
+        margin: 20px 0px 40px 0px;
+        width: 100%;    
+        border-color: gray;
+        border-top-width: 1px;  
+    }
+
+    .first-info {
+        margin-top: 30px;
+    }
+
+    p {
+        margin-bottom: 16px;
+        font-weight: 200;
+        font-size: 1rem;
+        text-align: left;
+        color: #00FFDC;
+ 
+    }
+
+    .hidden {
+        display: none;
+    }
+  
+
+    .details-section {
+        margin-top: 22px;
+        margin-bottom: 7px;
+        line-height: 45px;
+    }
+
+    hr {
+        margin-bottom: 10px;
+    }
+    
+    .casestudy {
+        color: #00FFDC;
+        text-align: left;
+        font-size: 1.8rem;
+        margin-bottom: 1px;
+    }
+
+    .problem, .solution {
+        font-size: 1.8rem;
+        color: white;
+        margin-bottom: 18px;
+        text-align: left;
+    }
+    
+    #design-development {
+        margin-bottom: 20px;
+        text-align: left;
+        color: white;
+        font-weight: 600;
+        margin-top: 0px;
+        font-size: 2.8rem;
+    }
+
+    .case-study {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        display: flex;
+        margin-bottom: 40px;
+        padding: 24px;
+        background-color: #F8F9FA;
+    }
+    
+    
+    .design-development-images img {
+        width: 48%;
+        height: auto;
+    }
+
+ 
+
+    .plus-icon {
+        margin-left: auto;
+        color: #00FFDC;
+        transition: color 0.3s ease;
+        font-size: 1.5rem;
+    }
+
+    .minus-icon:hover {
+        color: #01FFB4;
+    }
+
+    .arrow-buttons {
+        display: flex;
+        gap: 24px;
+    }
+
+    
+    .arrow-left, .arrow-right {
+        transition: color 0.3s ease;
+        font-size: 2rem;
+        color: #00FFDC;
+    }
+
+    .arrow-left:hover, .arrow-right:hover {
+        color: #01FFB4;
+    }
+
+    .goal-description {
+        margin-bottom: 16px;
+        font-weight: normal;
+    }
+
+    .full-width-hr {
+        width: 100%;
+        border-top-width: 1px;
+        border-color: gray;
+        margin: 10px 0;
+    }
+    
+    .design-development-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+    .left-text {
+        text-align: left;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #00FFDC;
+     
+    }
+    
+    .arrow-buttons {
+        display: flex;
+        gap: 16px;
+    }
+    
+    .arrow-left, .arrow-right {
+        color: #00FFDC;
+        font-size: 2rem;
+        transition: color 0.3s ease;
+    }
+
+    .arrow-left:hover, .arrow-right:hover {
+        color: #01FFB4;
+    }
+
+    
+    
+}
+
+.casestudies-container footer {
+    padding: 0; 
+}

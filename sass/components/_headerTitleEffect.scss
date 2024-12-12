@@ -1,12 +1,11 @@
 
 #demo-reel{
+   
     height: 500vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    background-color: white;
     overflow: hidden;
 }
 
@@ -27,4 +26,13 @@ p {
   
     font-size: 200px;   
 }
+}
+
+
+#player-container{
+    background-color: #01FFB4;
+}
+
+.video-container{
+    border-radius: 10px;
 }

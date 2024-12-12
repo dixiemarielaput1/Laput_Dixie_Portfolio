@@ -1,0 +1,132 @@
+@use '../abstracts' as *;
+.liner{
+  margin: 30px 0 !important;
+  border: 0.3px solid #00FFDC !important;
+} 
+.hero {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
+    }
+
+    .col {
+      padding: 20px;
+    }
+
+    .smallest {
+      flex: 0 0 50px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  .vertical-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  
+    .job-title {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .line {
+      width: 2px;
+      height: 160px;
+      background-color: #01FFB4;
+      margin: 10px 0;
+    }
+
+    .year {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 2rem;
+    }
+  }
+
+  .middle {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .rotated-border {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00B893;
+    transform: rotate(45deg);
+    padding: 10px 0px 8px 0px;
+    margin-left: 5px;
+    color: white;
+    border-radius: 12px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .socials a {
+    display: inline-block;
+  }
+
+  .socials a img {
+    transition: transform 0.3s ease;
+  }
+
+  .github { width: 50px; height: 50px; margin: 0 15px; }
+  .twitter { width: 70px; height: 70px; margin: 0 5px; }
+  .linkedin { width: 60px; height: 60px; margin: 0 15px; }
+
+  .socials a img:hover {
+    transform: scale(1.1);
+  }
+
+
+
+  .scroll-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .scroll-indicator p {
+    margin-right: 8px;
+    font-size: 16px;
+  }
+
+  .scroll-indicator .scroll-icon {
+    font-size: 24px;
+  }
+
+  .largest {
+    flex: 1; 
+    margin: 0px 4e0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00FFB4;
+    min-height: 200px; 
+  }
+}
