@@ -29,20 +29,33 @@
   text-align: center;
 }
 
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  pointer-events: none;
+
+
+.smallest {
+  display: none !important; /* Hide by default with !important */
+
+  @media (min-width: 768px) {
+    display: block !important; /* Show from tablet size (768px) and up with !important */
+ 
+  }
 }
 
-.galaxy-glow {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.7;
+@media (min-width: 412px) {
+.set-tools-text{
+  font-size:2rem;
 }
+
+
+.service-text{
+  text-align: center;
+}
+
+.center-al{
+  text-align: center;
+}
+}
+
+input::placeholder, textarea::placeholder {
+  color: black;
+}
+

@@ -15,7 +15,8 @@
 .form-input {
   margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
+  background-color: black;
   border-radius: 5px;
   resize: none; 
 }
@@ -39,5 +40,9 @@
 
   &:hover {
     background-color: #333; 
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: black;            /* Set placeholder text color */
   }
 }
