@@ -180,7 +180,7 @@ ScrollTrigger.create({trigger: ".projects-main-title",   start: "top center",   
     ScrollTrigger.create({start: "top top",trigger: ".name-hero, .services-title",onEnter: (e) => leftswiftEffect1.restart(),onLeaveBack: (e) => leftswiftEffect1.restart(),markers: false,once: false});
     const leftswiftEffect2 = gsap.timeline({ paused: true });
     leftswiftEffect2 .from(".web-dev-intro", {opacity: 0, x: 400,stagger: { amount: 0.7, ease: "expo.inOut", from: "start" },duration: 0.9 }) .from("#project-title", {opacity: 0, x:-120, y: -100,stagger: { amount: 0.7, ease: "expo.inOut", from: "start" },duration: 0.9}, "-=0.7"); 
-    ScrollTrigger.create({ start: "top bottom",  end: "bottom top",    trigger: ".web-dev-intro, #project-title", onEnter: () => leftswiftEffect2.restart(),  onLeaveBack: () => leftswiftEffect2.restart(),   markers: true,     once: false          
+    ScrollTrigger.create({ start: "top bottom",  end: "bottom top",    trigger: ".web-dev-intro, #project-title", onEnter: () => leftswiftEffect2.restart(),  onLeaveBack: () => leftswiftEffect2.restart(),   markers: false,     once: false          
     });
 
     gsap.registerPlugin(Physics2DPlugin);  
@@ -241,7 +241,7 @@ gsap.to("#rotating-image", { rotation: 360,  scale: -1,   repeat: -1,  duration:
 
   const serviceOfferEffect = gsap.timeline({ paused: true });
   serviceOfferEffect.from(".service-offer", {opacity: 0,  y: 100,  duration: 1, ease: "circ.out", });
-  ScrollTrigger.create({start: "top bottom",   end: "bottom top",    trigger: ".service-offer",onEnter: () => serviceOfferEffect.play(), markers: true,         once: true            
+  ScrollTrigger.create({start: "top bottom",   end: "bottom top",    trigger: ".service-offer",onEnter: () => serviceOfferEffect.play(), markers: false,         once: true            
   });
     const rotateEffect = gsap.timeline({ paused: true });
     rotateEffect.from("#service-icon", {y: -200,  opacity: 0,  scale: 0.1,  ease: "power3.out",   duration: 1.2,    onComplete: () => rotateBox()  });
