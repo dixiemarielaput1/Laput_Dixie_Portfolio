@@ -22,9 +22,9 @@ $allCount = mysqli_fetch_array($allCountResult)[0];
 $categoryFilter = isset($_GET['category']) ? $_GET['category'] : 'all';
 
 if ($categoryFilter == 'all') {
-    $query = "SELECT id, image, shortdetail, github, livelink, categoryid FROM projects";
+    $query = "SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects";
 } else {
-    $query = "SELECT id, image, shortdetail, github, livelink, categoryid FROM projects WHERE categoryid = $categoryFilter";
+    $query = "SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects WHERE categoryid = $categoryFilter";
 }
 
 $projectResults = mysqli_query($connect, $query);
@@ -103,7 +103,7 @@ while($row = mysqli_fetch_array($projectResults)) {
         <div class="portfolio-content mx-auto pt-4 pb-0 pl-4 pr-4">
             <div class="project-header mt-0 ml-5 mb-0 mr-5 h-auto flex justify-center flex-col">
                 <div class="flex items-center justify-between mt-0 project1">
-                    <span class="mt-0">Project ' . $projectId . '</span>
+                    <span class="mt-0">Project ' . $projectId . ' - '. $row['name'] .' </span>
                     <span class="exp-icon cursor-pointer" id="exp-icon-' . $projectId . '" onclick="toggleDetails(' . $projectId . ')">+</span>
                 </div>
                 
@@ -113,7 +113,7 @@ while($row = mysqli_fetch_array($projectResults)) {
 
                 <img class="project-image mt-7 mb-0 w-full h-auto rounded-lg hidden" src="images/' . $row['image'] . '" alt="Project Image">
                 
-                <p class="text-short-detail hidden" id="short-detail-' . $projectId . '" style="display: none;">
+                <p class="text-short-detail hidden" id="short-detail-' . $projectId . '" ">
                     ' . $row['shortdetail'] . '
                 </p>
 
@@ -141,36 +141,46 @@ while($row = mysqli_fetch_array($projectResults)) {
 }
 ?>
 
+
+
 <footer>
   <div class="container mx-auto p-4">
-    <div class="m-5 p-6 flex flex-col md:flex-row">
-      <div class="md:w-1/3 flex flex-col">
-        <h2 class="title-footer">Sitemap</h2>
+    <div class="ml-5 mr-5 mt-0 p-6 flex flex-col md:flex-row">
+      
+     
+      <div class="md:w-1/3 flex flex-col mt-0 mb-5 text-center md:text-left">
+        <h2 class="title-footer text-[#00FFDC]">Sitemap</h2>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Showreel</li>
-          <li>Portfolio</li>
-          <li>Contact</li>
+          <li><a href="index.php" class=" hover:text-[#00FFDC]">Home</a></li>
+          <li><a href="#about" class=" hover:text-[#00FFDC]">About</a></li>
+          <li><a href="#demo-reel" class=" hover:text-[#00FFDC]">Showreel</a></li>
+          <li><a href="portfolio.php" class=" hover:text-[#00FFDC]">Portfolio</a></li>
+          <li><a href="#contact" class=" hover:text-[#00FFDC]">Contact</a></li>
         </ul>
       </div>
-      <div class="md:w-1/3 flex flex-col">
-        <h2 class="title-footer">Socials</h2>
+
+      <div class="md:w-1/3 flex flex-col mt-0 mb-5 text-center md:text-left">
+        <h2 class="title-footer text-[#00FFDC]">Socials</h2>
         <ul>
-          <li>GitHub</li>
-          <li>LinkedIn</li>
-          <li>Twitter</li>
+          <li><a href="https://github.com/dixiemarielaput1" class=" hover:text-[#00FFDC]" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/dixie-m/" class=" hover:text-[#00FFDC]" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/dixiemarielaput/" class=" hover:text-[#00FFDC]" target="_blank">Instagram</a></li>
         </ul>
       </div>
-      <div class="md:w-1/3 flex flex-col items-end relative footer-right-info">
-        <h2 class="text-3xl"><span class="text-details">WANT TO</span><br> <span class="text-details">WORK WITH</span><br><span id="email-footer">dixiemarielaput1@gmail.com</span> <span class="text-details">ME?</span></h2>  
+
+
+      <div class="md:w-1/3 flex flex-col text-center md:text-left">
+        <h2 class="text-4xl text-white mt-0 mb-5">WANT TO WORK WITH ME?</h2>  
+        <h3 class="text-2xl text-[#00FFDC]">dixiemarielaput1@gmail.com</h3>  
       </div>
+
     </div>
+
     <hr class="my-4 border-white text-white" />
+    
     <p class="footer-copyright text-center text-white text-sm ">© Dixie Laput. 2024</p>
   </div>
 </footer>
-
 <script src="js/tester.js"></script>
 
 </body>

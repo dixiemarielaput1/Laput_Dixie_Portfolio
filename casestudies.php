@@ -129,8 +129,46 @@ $images = mysqli_fetch_all($imageResults, MYSQLI_ASSOC);
         </div>
     </div>
 
+
+
     <footer>
-    </footer>
+  <div class="container mx-auto p-4">
+    <div class="ml-5 mr-5 mt-0 p-6 flex flex-col md:flex-row">
+      
+     
+      <div class="md:w-1/3 flex flex-col mt-0 mb-5 text-center md:text-left">
+        <h2 class="title-footer text-[#00FFDC]">Sitemap</h2>
+        <ul>
+          <li><a href="index.php" class=" hover:text-[#00FFDC]">Home</a></li>
+          <li><a href="#about" class=" hover:text-[#00FFDC]">About</a></li>
+          <li><a href="#demo-reel" class=" hover:text-[#00FFDC]">Showreel</a></li>
+          <li><a href="portfolio.php" class=" hover:text-[#00FFDC]">Portfolio</a></li>
+          <li><a href="#contact" class=" hover:text-[#00FFDC]">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="md:w-1/3 flex flex-col mt-0 mb-5 text-center md:text-left">
+        <h2 class="title-footer text-[#00FFDC]">Socials</h2>
+        <ul>
+          <li><a href="https://github.com/dixiemarielaput1" class=" hover:text-[#00FFDC]" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/dixie-m/" class=" hover:text-[#00FFDC]" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/dixiemarielaput/" class=" hover:text-[#00FFDC]" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+
+
+      <div class="md:w-1/3 flex flex-col text-center md:text-left">
+        <h2 class="text-4xl text-white mt-0 mb-5">WANT TO WORK WITH ME?</h2>  
+        <h3 class="text-2xl text-[#00FFDC]">dixiemarielaput1@gmail.com</h3>  
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-white text-white" />
+    
+    <p class="footer-copyright text-center text-white text-sm ">© Dixie Laput. 2024</p>
+  </div>
+</footer>
 
     <script src="js/tester2.js"></script> 
     
