@@ -1,3 +1,5 @@
+
+
 .projects-main-info {
   p {
       color: white;
@@ -31,6 +33,7 @@
 
 
 
+
 .smallest {
   display: none !important; /* Hide by default with !important */
 
@@ -59,3 +62,27 @@ input::placeholder, textarea::placeholder {
   color: black;
 }
 
+/* Hover circle style */
+/* Ensure perfect circle with opacity and centered text */
+.see-project-text {
+  /* Hide by default */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  /* Create a perfect circle */
+  border-radius: 50%;
+  width: 200px; /* Width of the circle */
+  height: 200px; /* Height of the circle */
+  background-color: rgba(255, 255, 255, 0.8); /* White background with opacity */
+  color: black; /* Text color */
+  font-size: 14px; /* Text size */
+  font-weight: bold; /* Text weight */
+  text-align: center; /* Center text */
+  padding: 0;
+}
+
+.gallery-slide:hover .see-project-text {
+  /* When hovering, show the circle */
+  opacity: 1;
+  transform: scale(1); /* Circle stays centered */
+  transition: opacity 0.3s, transform 0.3s;
+}

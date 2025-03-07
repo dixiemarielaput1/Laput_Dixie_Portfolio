@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Physics2DPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/MotionPathPlugin.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollToPlugin.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/Tween.min.js" defer></script>
   
   <script src="js/Physics2DPlugin.min.js"></script> 
-  <script src="js/MotionPathPlugin.min.js" defer></script> 
+  <script src="js/MotionPathPlugin.min.js"></script> 
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
   <link rel="stylesheet" href="css/main.css">
 
-
+  
   <title>Portfolio</title>
 </head>
+
+<body>
 <div class="bg-black  bg-noise">
 
 <!--navbar section-->
@@ -45,7 +51,7 @@
           <li><a href="#about" class="text-white hover:text-[#00FFDC]">About</a></li>
           <li><a href="portfolio.php" class="text-white hover:text-[#00FFDC]">Portfolio</a></li>
           <img src="images/dl.svg" alt="logo portfolio" class="w-16 h-16">
-          <li><a href="casestudies-dashboard.php" class="text-white hover:text-[#00FFDC]">Case Studies</a></li>
+      
           <li><a href="#demo-reel" class="text-white hover:text-[#00FFDC]">Showreel</a></li>
           <li><a href="#contact" class="text-white hover:text-[#00FFDC]">Contact</a></li>
       </ul>
@@ -53,12 +59,11 @@
 </nav>
 <div id="navbar-mobile" class="hidden md:hidden">
   <ul class="flex flex-col space-y-2 p-4 bg-black shadow-md items-center">
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Home</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">About</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Portfolio</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Case Studies</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Showreel</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Contact</a></li>
+      <li><a href="index.php" class="block text-white hover:text-[#00FFDC]">Home</a></li>
+      <li><a href="#about" class="block text-white hover:text-[#00FFDC]">About</a></li>
+      <li><a href="portfolio.php" class="block text-white hover:text-[#00FFDC]">Portfolio</a></li>
+      <li><a href="#demo-reel" class="block text-white hover:text-[#00FFDC]">Showreel</a></li>
+      <li><a href="#contact" class="block text-white hover:text-[#00FFDC]">Contact</a></li>
   </ul>
 </div>
 
@@ -97,9 +102,11 @@ HELLO,
           <img src="images/tw1.svg" alt="Twitter" />
         </a>
       </div>
-      <p class="robot-text" id="email">dixiemarielaput1@gmail.com</p>
+      <p class="robot-text" id="craft">Crafting Interactive Experiences✨</p>
       <hr class="border-t border-[#00FFDC] liner">
-      <p class="robot-text" id="phone">Phone: (+1) 519-639-7794</p>
+      <p class="robot-text" id="phone">Talk To Me Now 
+        <span class="heart-icon">💓</span> 
+      </p>
       <hr class="border-t border-[#00FFDC] liner">
       <div class="scroll-indicator">
         <div class="scroll-icon">↓</div>
@@ -156,21 +163,67 @@ HELLO,
     </div>
   </div>
 </div>
-
-
-
-
 <?php
 require_once('includes/connect.php');
-$query = 'SELECT id, name, image FROM projects ORDER BY name ASC LIMIT 1;';
-$results = mysqli_query($connect,$query);
+$stmt = $connection->prepare('SELECT id, name, image FROM projects ORDER BY id ASC;');
+$stmt->execute();
 ?>
+
+<section class="project-con flex flex-col items-center justify-between relative">
+<div id="gallery-container" class="flex items-center justify-center w-full overflow-hidden mb-6">
+    <?php
+    $index = 0; 
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+
+        echo '<div class="gallery-slide ' . ($index === 0 ? '' : 'hidden') . ' flex justify-center items-center mx-6 relative">
+                <div class="text-center relative">
+                    <h3 class="text-6xl font-semibold mb-6 mt-10 text-white">' . $row['name'] . '</h3>
+                    <a href="project_detail.php?id=' . $row['id'] . '" class="relative group">
+                        <img class="thumbnail w-256 h-auto object-cover rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105" src="images/' . $row['image'] . '" alt="Project Thumbnail">
+                       
+   <span class="see-project-text group-hover:opacity-100 opacity-0 absolute top-1/2 right-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-black rounded-full font-semibold transition-all duration-300 w-60 h-60 bg-[#00ffc8] group-hover:bg-opacity-80">
+    Project Details
+</span>
+                    </a>
+                </div>
+              </div>';
+        $index++;
+    }
+    ?>
+</div>
+    
+
+
+
+    <div class="w-full flex justify-between items-center px-84">
+        
+  
+        <div class="text-5xl font-bold text-white">
+            2025
+        </div>
+
+      
+   <div class="flex space-x-4">
+    <button id="prev-btn" class="p-2 bg-teal-500 text-white rounded-full hover:bg-teal-400 transition transform hover:scale-110">
+        <img class="w-5 h-5 transform -rotate-180" src="images/arrowslim.svg" alt="Previous Arrow">
+    </button>
+    <button id="next-btn" class="p-2 bg-teal-500 text-white rounded-full hover:bg-teal-400 transition transform hover:scale-110">
+        <img class="w-5 h-5 transform" src="images/arrowslim.svg" alt="Next Arrow">
+    </button>
+</div>
+
+    </div>
+
+</section>
+
+<?php $stmt = null; ?>
+
 
 
 
 
 <!-- Projects Section gallery section-->
-<div class="container mx-auto p-4 text-white" id="project-gallery">
+<div class="container mx-auto p-4 text-white hidden" id="project-gallery">
   <div class="flex mt-5 mb-10 pt-0 pb-0 w-full max-w-6xl mx-auto justify-between items-center"> 
     <div class="flex-1 text-left">
 
@@ -198,7 +251,7 @@ $results = mysqli_query($connect,$query);
 
 
   <div class="flex flex-col items-center w-full mt-4 project-gallery-right">
-    <!-- You can add a date here if needed -->
+  
   </div>
 </div>
 
@@ -206,12 +259,12 @@ $results = mysqli_query($connect,$query);
 <div class="container mx-auto pr-4 pl-4 pt-0 pb-0 text-white" id="case-studies-section">
   <div class="flex mt-0 mb-0 pt-0 pb-0 w-full max-w-6xl mx-auto justify-between items-center">
  
-    <div class="flex-1 text-left">
+    <div class="flex-1 text-left hidden">
       <h2 class="text-white text-2xl md:text-2xl font-regular sm:w-auto">2024</h2> 
     </div>
 
     <!-- View Case Studies Button -->
-    <div class="flex items-center justify-end space-x-4 sm:space-x-2 ">
+    <div class="flex items-center justify-end space-x-4 sm:space-x-2 hidden">
       <img src="images/right-circled.svg" alt="icon" class="w-5 h-5 mr-3 sm:mr-1">
       <button class="viewallproject text-white sm:mr-2 w-full sm:w-auto">View Case Studies</button> 
     </div>
@@ -307,10 +360,11 @@ $results = mysqli_query($connect,$query);
 
   <div class="container mx-auto px-4 py-8 mt-0">
     <div class="text-center mb-8 ml-10">
-    <h2 class="how-text  sm:text-5xl md:text-6xl font-semibold text-[#00FFDC] text-left flex items-center">
+    <h2 class="how-text sm:text-5xl md:text-6xl font-semibold text-[#00FFDC] text-left flex items-center">
   How Can I Help You? 
   <img src="images/arrowdes.svg" alt="Arrow" class="text-lg w-16 ml-10 sm:" />
 </h2>
+    </div>
     </div>
     
     <div class="flex flex-col md:flex-row gap-8 ml-10 mr-10">
@@ -390,22 +444,20 @@ $results = mysqli_query($connect,$query);
     </div>
 
     
-</div>
-
 
 
 
 
 <div class="container mx-auto p-4" id="tools">
-<div class="flex m-5 pt-0 pl-6 pr-0 pb-0">
-  <div class="flex flex-1 items-center tools-main-title">
-    <h1 class=" set-tools-text md:text-7xl sm:text-2xl text-[#00FFDC] flex items-center">
-      <img src="images/saw.svg" alt="Tools Icon" class="sm:w-12 sm:h-12 w-24 h-24 lg:w-24 lg:h-24 md:w-24 md:h-24 mr-2 tool" />
-      { Tools Used }
-    </h1>
+  <div class="flex m-5 pt-0 pl-6 pr-0 pb-0">
+    <div class="flex flex-1 items-center tools-main-title">
+      <span class="text-[#00FFDC] set-tools-text md:text-7xl sm:text-2xl flex items-center ">
+        <img src="images/saw.svg" alt="Tools Icon" class="sm:w-12 sm:h-12 w-24 h-24 lg:w-24 lg:h-24 md:w-24 md:h-24 mr-2 tool" />
+        Tools Used
+      </span  >
+    </div>
   </div>
 </div>
-  </div>
 
 
 <div class="flex flex-wrap justify-center ml-40">
@@ -444,77 +496,68 @@ $results = mysqli_query($connect,$query);
 </div>
 
 
-  <!-- Demo Reel Section -->
-  <div class="container mx-auto flex flex-col items-center  pt-10 pb-8 pl-8 pr-8" id="demo-reel">
-    <!-- Title Effect -->
-      <div class="text-6xl text-white  pt-0 pb-2 pl-8 pr-8 flex flex-row">
-        <p class="text-[#00FFDC]">DEMO REEL </p>
-        <img src="images/glasses.svg" alt="Icon" class="w-24 h-24 items-center ml-10 pb-10" id="glasses-icon" />
-      </div>
+<div class="container mx-auto flex flex-col items-center pt-10 pb-8 pl-8 pr-8" id="demo-reel">
+  <!-- Title Effect -->
+  <div class="text-6xl text-white pt-0 pb-2 pl-8 pr-8 flex flex-row">
+    <p class="text-[#00FFDC]">DEMO REEL</p>
+    <img src="images/glasses.svg" alt="Icon" class="w-24 h-24 items-center ml-10 pb-10" id="glasses-icon" />
+  </div>
 
-
-    <div class="flex flex-col items-center w-full max-w-screen-2xl mt-2 mb-2 p-10 rounded-lg overflow-hidden --plyr-audio-control-background-hover">
-      <div id="player-container" class="relative w-full max-w-7xl">
-        <video controls preload="metadata" poster="images/expo2.png" class="w-full">
+  <div class="flex flex-col items-center w-full max-w-screen-2xl mt-2 mb-2 p-10 rounded-lg overflow-hidden ">
+    <div id="player-container" class="relative w-full max-w-7xl">
+      <!-- Plyr.io Video Player -->
+  <video controls preload="metadata" poster="images/839.jpg" class="w-full">
           <source src="video/Laput_dixie_demoreel.mp4" type="video/mp4">
           <source src="video/video.webm" type="video/webm">
           <p>Oops, something went wrong. You may be using an outdated browser or have JavaScript disabled.</p>
         </video>
 
-        <!-- Video controls -->
-        <div class="video-controls hidden absolute bottom-0 w-full bg-gradient-to-t from-black via-transparent to-transparent p-4 flex justify-between items-center">
-          <button id="play-button" class="text-white"><i class="fa fa-play-circle-o text-3xl"></i></button>
-          <button id="pause-button" class="text-white"><i class="fa fa-pause-circle-o text-3xl"></i></button>
-          <button id="stop-button" class="text-white"><i class="fa fa-stop-circle-o text-3xl"></i></button>
-          <i class="fa fa-volume-up text-white text-3xl"></i>
-          <input type="range" id="change-vol" step="0.05" min="0" max="1" value="1" class="w-1/3 mx-2">
-          <button id="full-screen" class="text-white text-3xl"><i class="fa fa-arrows-alt"></i></button>
-        </div>
-      </div>
     </div>
   </div>
-
-  <!-- Contact Section -->
-  <div class="container mx-auto pl-4 pr-4 pb-4" id="contact">
-    <div class="flex flex-col md:flex-row  mt-0 mr-5 ml-5 mb-5 pt-0 pr-6 pl-6 pb-0 h-auto">
-      <div class="md:w-1/2 flex items-start justify-start flex-col text-left text-white ">
-        <h1 class="text-center md:text-left text-[#00FFDC]">Contact</h1>
-        <p class="text-lg lg:text-2xl ">
-  Let's Connect! 
-  I’m always excited to meet new people and explore opportunities for collaboration, growth, and innovation.
-</p>
-<div class="contact-details">
-<h2 class="text-[#00FFDC] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-5">Address</h2>
-  <p class="text-base md:text-lg lg:text-xl xl:text-2xl">London, Ontario, Canada.</p>
-  
-  <h2 class="text-[#00FFDC] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-5">Phone</h2>
-  <p class="text-base md:text-lg lg:text-xl xl:text-2xl">(+1) 519-639-7794</p>
-  
-  <h2 class="text-[#00FFDC] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-5">Email</h2>
-  <p class="text-base md:text-lg lg:text-xl xl:text-2xl">dixiemarielaput1@gmail.com</p>
 </div>
+
+<!-- Contact Section -->
+<div class="container mx-auto pl-4 pr-4 pb-4" id="contact">
+  <div class="flex flex-col md:flex-row mt-0 mr-5 ml-5 mb-5 pt-0 pr-6 pl-6 pb-0 h-auto">
+    <div class="md:w-1/2 flex items-start justify-start flex-col text-left text-white">
+      <h1 class="text-center md:text-left text-[#00FFDC]">Contact</h1>
+      <p class="text-lg lg:text-2xl">
+        Let's Connect! 
+        I’m always excited to meet new people and explore opportunities for collaboration, growth, and innovation.
+      </p>
+      <div class="contact-details">
+        <h2 class="text-[#00FFDC] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-5">Address</h2>
+        <p class="text-base md:text-lg lg:text-xl xl:text-2xl">London, Ontario, Canada.</p>
+
+        <h2 class="text-[#00FFDC] text-lg md:text-xl lg:text-2xl xl:text-3xl mt-5">Availability</h2>
+        <p class="text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed"> 
+          I'm currently available for [projects/consultations/partnerships].<br>
+          Feel free to reach out if you'd like to discuss potential collaborations!
+        </p>
       </div>
-      
-      <div class="md:w-1/2 flex items-center justify-center">
-  <form action="contact.php" method="POST" class="contact-form bg-contact-form mt-12">
-    <h2 class="mb-5">Contact Form</h2>
+    </div>
 
-    <label for="first-name">First Name</label>
-    <input type="text" id="first-name" name="first_name" required class="form-input" placeholder="Your First Name" />
+    <div class="md:w-1/2 flex items-center justify-center">
+      <form action="contact.php" method="POST" class="contact-form bg-contact-form mt-12 p-6 rounded-lg shadow-lg">
+        <h2 class="mb-5 text-black text-xl">Contact Form</h2>
 
-    <label for="phone">Phone</label>
-    <input type="tel" id="phone" name="phone" required class="form-input" placeholder="Your Phone Number" />
+        <label for="first-name" class="text-black">First Name</label>
+        <input type="text" id="first-name" name="first_name" required class=" text-black form-input text-white bg-gray-800 border border-gray-600 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-[#00FFDC]" placeholder="Your First Name" />
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required class="form-input" placeholder="Your Email" />
+        <label for="phone" class="text-black">Phone</label>
+        <input type="tel" id="phone" name="phone" required class=" text-black form-input text-white bg-gray-800 border border-gray-600 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-[#00FFDC]" placeholder="Your Phone Number" />
 
-    <label for="message">Message</label>
-    <textarea id="message" name="comments" required class="form-input" placeholder="Your Message"></textarea>
+        <label for="email" class="text-black">Email</label>
+        <input type="email" id="email" name="email" required class="text-black form-input text-white bg-gray-800 border border-gray-600 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-[#00FFDC]" placeholder="Your Email" />
 
-    <button type="submit" class="submit-button">Send Message</button>
-  </form>
+        <label for="message" class="text-black">Message</label>
+        <textarea id="message" name="comments" required class=" text-black form-input text-white bg-gray-800 border border-gray-600 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-[#00FFDC]" placeholder="Your Message"></textarea>
+
+        <button type="submit" class="submit-button bg-[#00FFDC] text-white py-3 px-6 rounded-lg hover:bg-[#00b3b3] transition-all duration-200">Send Message</button>
+      </form>
+    </div>
+  </div>
 </div>
-
 
   </div>
 
@@ -550,7 +593,7 @@ $results = mysqli_query($connect,$query);
 
       <div class="md:w-1/3 flex flex-col text-center md:text-left">
         <h2 class="text-4xl text-white mt-0 mb-5">WANT TO WORK WITH ME?</h2>  
-        <h3 class="text-2xl text-[#00FFDC]">dixiemarielaput1@gmail.com</h3>  
+          <h3 class="text-2xl text-[#00FFDC]">Let's create website together!</h3>   
       </div>
 
     </div>
@@ -563,9 +606,9 @@ $results = mysqli_query($connect,$query);
 
 
 
-  <script src="js/main.js"></script>
-
-
-
+<script type="module" src="./js/main_index.js"></script>
 </body>
+
+
+
 </html>
