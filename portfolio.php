@@ -4,30 +4,28 @@
 <?php
 require_once('includes/connect.php');
 
-$categoryQuery = "SELECT categoryid, categoryname FROM categories";
-$categoryResults = mysqli_query($connect, $categoryQuery);
 
-$codeCountQuery = "SELECT COUNT(*) FROM projects WHERE categoryid = 1";
-$designCountQuery = "SELECT COUNT(*) FROM projects WHERE categoryid = 2";
-$allCountQuery = "SELECT COUNT(*) FROM projects";
+$stmtCodeCount = $connection->prepare("SELECT COUNT(*) FROM projects WHERE categoryid = 1");
+$stmtDesignCount = $connection->prepare("SELECT COUNT(*) FROM projects WHERE categoryid = 2");
+$stmtAllCount = $connection->prepare("SELECT COUNT(*) FROM projects");
 
-$codeCountResult = mysqli_query($connect, $codeCountQuery);
-$designCountResult = mysqli_query($connect, $designCountQuery);
-$allCountResult = mysqli_query($connect, $allCountQuery);
+$stmtCodeCount->execute();
+$stmtDesignCount->execute();
+$stmtAllCount->execute();
 
-$codeCount = mysqli_fetch_array($codeCountResult)[0];
-$designCount = mysqli_fetch_array($designCountResult)[0];
-$allCount = mysqli_fetch_array($allCountResult)[0];
+$codeCount = $stmtCodeCount->fetchColumn();
+$designCount = $stmtDesignCount->fetchColumn();
+$allCount = $stmtAllCount->fetchColumn();
 
-$categoryFilter = isset($_GET['category']) ? $_GET['category'] : 'all';
+$categoryFilter = $_GET['category'] ?? 'all';  
 
 if ($categoryFilter == 'all') {
-    $query = "SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects";
+    $stmt = $connection->prepare("SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects");
 } else {
-    $query = "SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects WHERE categoryid = $categoryFilter";
+    $stmt = $connection->prepare("SELECT id, name, image, shortdetail, github, livelink, categoryid FROM projects WHERE categoryid = :categoryid");
+    $stmt->bindParam(':categoryid', $categoryFilter, PDO::PARAM_INT);
 }
-
-$projectResults = mysqli_query($connect, $query);
+$stmt->execute();
 ?>
 
 <head>
@@ -42,12 +40,12 @@ $projectResults = mysqli_query($connect, $query);
 </head>
 
 <body class="bg-black">
-  
+
 
 <!--navbar section-->
 <nav class="bg-black shadow">
   <div class="block md:hidden flex items-center justify-between w-full pt-4 pl-2">
-      <button id="menu-icon" class="focus:outline-none w-10 h-10 text-white">
+      <button id="menu-icon2" class="focus:outline-none w-10 h-10 text-white">
           <i class="fas fa-bars text-white"></i>
       </button>
 
@@ -56,28 +54,29 @@ $projectResults = mysqli_query($connect, $query);
       </div>
   </div>
 
-  <div class="container mx-auto px-12 py-12 flex justify-center items-center">
+  <div class="container mx-auto px-2 py-2 flex justify-center items-center">
     <ul id="menu" class="hidden md:flex md:space-x-20 md:justify-center md:p-4 md:bg-black items-center">
           <li><a href="index.php" class="text-white hover:text-[#00FFDC]">Home</a></li>
-          <li><a href="#about" class="text-white hover:text-[#00FFDC]">About</a></li>
+          <li><a href="index.php#about" class="text-white hover:text-[#00FFDC]">About</a></li>
           <li><a href="portfolio.php" class="text-white hover:text-[#00FFDC]">Portfolio</a></li>
           <img src="images/dl.svg" alt="logo portfolio" class="w-16 h-16">
-          <li><a href="casestudies-dashboard.php" class="text-white hover:text-[#00FFDC]">Case Studies</a></li>
-          <li><a href="#demo-reel" class="text-white hover:text-[#00FFDC]">Showreel</a></li>
-          <li><a href="#contact" class="text-white hover:text-[#00FFDC]">Contact</a></li>
+      
+          <li><a href="index.php#demo-reel" class="text-white hover:text-[#00FFDC]">Showreel</a></li>
+          <li><a href="index.php#contact" class="text-white hover:text-[#00FFDC]">Contact</a></li>
       </ul>
   </div>
 </nav>
-<div id="navbar-mobile" class="hidden md:hidden">
+<div id="navbar-mobile2" class="hidden md:hidden">
   <ul class="flex flex-col space-y-2 p-4 bg-black shadow-md items-center">
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Home</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">About</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Portfolio</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Case Studies</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Showreel</a></li>
-      <li><a href="#" class="block text-white hover:text-[#00FFDC]">Contact</a></li>
+      <li><a href="index.php" class="block text-white hover:text-[#00FFDC]">Home</a></li>
+      <li><a href="index.php#about" class="block text-white hover:text-[#00FFDC]">About</a></li>
+      <li><a href="portfolio.php" class="block text-white hover:text-[#00FFDC]">Portfolio</a></li>
+      <li><a href="index.php#demo-reel" class="block text-white hover:text-[#00FFDC]">Showreel</a></li>
+      <li><a href="index.php#contact" class="block text-white hover:text-[#00FFDC]">Contact</a></li>
   </ul>
 </div>
+
+
 
 <div class="portfolio-container mx-auto p-4">
   <div class="mt-5 ml-5 mr-5 mb-0 p-1 h-auto flex justify-center flex-col">
@@ -94,26 +93,23 @@ $projectResults = mysqli_query($connect, $query);
 </div>
 
 <?php
-while($row = mysqli_fetch_array($projectResults)) {
-    $projectId = $row['id'];
-
-    echo 
-    '
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo '
     <div class="row">
         <div class="portfolio-content mx-auto pt-4 pb-0 pl-4 pr-4">
             <div class="project-header mt-0 ml-5 mb-0 mr-5 h-auto flex justify-center flex-col">
                 <div class="flex items-center justify-between mt-0 project1">
-                    <span class="mt-0">Project ' . $projectId . ' - '. $row['name'] .' </span>
-                    <span class="exp-icon cursor-pointer" id="exp-icon-' . $projectId . '" onclick="toggleDetails(' . $projectId . ')">+</span>
+                    <span class="mt-0">Project ' . $row['id'] . ' - ' . $row['name'] . ' </span>
+                    <span class="exp-icon cursor-pointer" id="exp-icon-' . $row['id'] . '" onclick="toggleDetails(' . $row['id'] . ')">+</span>
                 </div>
                 
-                <div class="extra-detail-project" id="extra-detail-' . $projectId . '" style="display: none;">
+                <div class="extra-detail-project" id="extra-detail-' . $row['id'] . '" style="display: none;">
                     <span class="text-white">Create and build dynamic pages.</span>
                 </div>
 
                 <img class="project-image mt-7 mb-0 w-full h-auto rounded-lg hidden" src="images/' . $row['image'] . '" alt="Project Image">
                 
-                <p class="text-short-detail hidden" id="short-detail-' . $projectId . '" ">
+                <p class="text-short-detail hidden" id="short-detail-' . $row['id'] . '" >
                     ' . $row['shortdetail'] . '
                 </p>
 
@@ -128,11 +124,12 @@ while($row = mysqli_fetch_array($projectResults)) {
                         <img src="images/arrowlinks.svg" alt="Live Project" class="w-5 h-5 ml-2 -rotate-45">
                     </a>
 
-       <a href="casestudies.php?id=' . $projectId . '" class="more-info-btn bg-black text-[#00FFDC] p-2 mt-2 mr-2 rounded-lg border-2 border-solid border-[#00FFDC] flex items-center hidden" id="more-info-btn-' . $projectId . '">
-    More Information
-    <img src="images/arrowlinks.svg" alt="More Info" class="w-5 h-5 ml-2 -rotate-45">
-</a>
+                    <a href="project_detail.php?id=' . $row['id'] . '" class="more-info-btn bg-black text-[#00FFDC] p-2 mt-2 mr-2 rounded-lg border-2 border-solid border-[#00FFDC] flex items-center hidden">
+                        More Information
+                        <img src="images/arrowlinks.svg" alt="More Info" class="w-5 h-5 ml-2 -rotate-45">
+                    </a>
 
+                    
                 </div>
                 <hr class="full-width-hr-main">
             </div>
@@ -141,13 +138,12 @@ while($row = mysqli_fetch_array($projectResults)) {
 }
 ?>
 
-
+$stmt = null; // Close the statement
+?>
 
 <footer>
   <div class="container mx-auto p-4">
     <div class="ml-5 mr-5 mt-0 p-6 flex flex-col md:flex-row">
-      
-     
       <div class="md:w-1/3 flex flex-col mt-0 mb-5 text-center md:text-left">
         <h2 class="title-footer text-[#00FFDC]">Sitemap</h2>
         <ul>
@@ -168,10 +164,9 @@ while($row = mysqli_fetch_array($projectResults)) {
         </ul>
       </div>
 
-
       <div class="md:w-1/3 flex flex-col text-center md:text-left">
         <h2 class="text-4xl text-white mt-0 mb-5">WANT TO WORK WITH ME?</h2>  
-        <h3 class="text-2xl text-[#00FFDC]">dixiemarielaput1@gmail.com</h3>  
+        <h3 class="text-2xl text-[#00FFDC]">Let's create website together!</h3>   
       </div>
 
     </div>
@@ -181,7 +176,9 @@ while($row = mysqli_fetch_array($projectResults)) {
     <p class="footer-copyright text-center text-white text-sm ">© Dixie Laput. 2024</p>
   </div>
 </footer>
+<script type="module" src="./js/main_portfolio"></script>
 <script src="js/tester.js"></script>
+
 
 </body>
 </html>

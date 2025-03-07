@@ -1,0 +1,20 @@
+.plyr__control {
+    background-color: #00b3ff; /* Teal background */
+    color: white; /* White text/icons */
+    border-radius: 50%; /* Round controls */
+    transition: background-color 0.3s ease;
+  }
+
+  .plyr__control:hover {
+    background-color: #008c99; /* Darker teal on hover */
+  }
+
+  /* Optional: Change volume control */
+  .plyr__volume input {
+    background-color: #00b3ff;
+  }
+
+  /* Optional: Custom Focus Styles */
+  .plyr__control:focus {
+    box-shadow: 0 0 0 3px rgba(0, 183, 255, 0.6);
+  }

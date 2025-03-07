@@ -1,48 +1,51 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 require_once('includes/connect.php');  
 
-$fname = $_POST['first_name'] ?? ''; 
-$phone = $_POST['phone'] ?? '';
-$email = $_POST['email'] ?? '';
-$msg = $_POST['comments'] ?? '';  
 
-$errors = []; 
+$fname = trim($_POST['first_name'] ?? ''); 
+$phone = trim($_POST['phone'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$msg = trim($_POST['comments'] ?? '');
 
-
-$fname = trim($fname);
-$phone = trim($phone);
-$email = trim($email);
-$msg = trim($msg);
+$errors = [];  
+$response = [];
 
 
-if (empty($fname)) {
-    $errors['first_name'] = 'First Name can\'t be empty';
+if ($fname === '') {
+    $errors['first_name'] = 'First Name cannot be empty';
 }
 
-if (empty($msg)) {
-    $errors['comments'] = 'Message field can\'t be empty';
+if ($msg === '') {
+    $errors['comments'] = 'Message cannot be empty';
 }
 
-if (empty($email)) {
-    $errors['email'] = 'You must provide an email';
-} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if ($email === '') {
+    $errors['email'] = 'Email is required';
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors['email_invalid'] = 'Please provide a valid email address';
 }
 
 
-echo "First Name: $fname, Phone: $phone, Email: $email, Message: $msg<br>";
+if (!empty($errors)) {
+    echo json_encode(['success' => false, 'errors' => $errors]);
+    exit();
+}
 
-if (empty($errors)) {
-    $fname = mysqli_real_escape_string($connect, $fname);
-    $phone = mysqli_real_escape_string($connect, $phone);
-    $email = mysqli_real_escape_string($connect, $email);
-    $msg = mysqli_real_escape_string($connect, $msg);
+try {
 
     $query = "INSERT INTO contacts (name, phone, email, message) 
-              VALUES ('$fname', '$phone', '$email', '$msg')";
+              VALUES (:fname, :phone, :email, :msg)";
+    $stmt = $connection->prepare($query);
 
-    if (mysqli_query($connect, $query)) {
+    $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);  
+    $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);  
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);  
+    $stmt->bindParam(':msg', $msg, PDO::PARAM_STR);      
+
+   
+    if ($stmt->execute()) {
 
         $to = 'dixiemarielaput1@gmail.com';  
         $subject = 'New Contact Form Submission';
@@ -53,19 +56,21 @@ if (empty($errors)) {
         $message .= "Message: $msg\n";
 
 
-        mail($to, $subject, $message);
-
-  
-        header('Location: thank_you.php');
-        exit(); 
+        if (mail($to, $subject, $message)) {
+            $response = ['success' => true, 'message' => 'Your message has been successfully submitted!'];
+        } else {
+            $response = ['success' => false, 'message' => 'Failed to send email. Please try again later.'];
+        }
     } else {
-     
-        echo "Error: " . mysqli_error($connect);  
+        $response = ['success' => false, 'message' => 'Could not save your message in the database. Please try again later.'];
     }
-} else {
 
-    foreach ($errors as $error) {
-        echo "<p style='color: red;'>$error</p>";
-    }
+    echo json_encode($response);
+
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
 }
+
+$stmt = null;
+
 ?>
